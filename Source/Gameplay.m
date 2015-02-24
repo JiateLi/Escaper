@@ -45,8 +45,8 @@
 - (void)step
 {
     [_grid evolveStep];
-    _stepLabel.string = [NSString stringWithFormat:@"%d", _grid.setp];
-    _timeLabel.string = [NSString stringWithFormat:@"%d", _grid.time];
+    _stepLabel.string = [NSString stringWithFormat:@"%d", _grid.totalStep];
+    _timeLabel.string = [NSString stringWithFormat:@"%d", _grid.restStep];
 }
 
 

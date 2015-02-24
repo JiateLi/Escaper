@@ -14,6 +14,10 @@
 @property (nonatomic, assign) int setp;
 @property (nonatomic, assign) int time;
 
+@property (nonatomic, assign) int totalStep;
+@property (nonatomic, assign) int restStep;
+
+
 - (void)evolveStep;
 - (void)updateCreatures;
 
