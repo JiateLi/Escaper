@@ -29,6 +29,10 @@
     
 }
 
+- (void)menu{
+    CCScene *gameplayScene = [CCBReader loadAsScene:@"Gameplay"];
+    [[CCDirector sharedDirector] replaceScene:gameplayScene];
+}
 
 - (void)play
 {
@@ -45,7 +49,7 @@
 - (void)step
 {
     [_grid evolveStep];
-    _stepLabel.string = [NSString stringWithFormat:@"%d", _grid.totalStep];
+    _stepLabel.string = [NSString stringWithFormat:@"%d", _grid.totalCount];
     _timeLabel.string = [NSString stringWithFormat:@"%d", _grid.restStep];
 }
 

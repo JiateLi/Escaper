@@ -16,7 +16,7 @@
 
 @property (nonatomic, assign) int totalStep;
 @property (nonatomic, assign) int restStep;
-
+@property (nonatomic, assign) int totalCount;
 
 - (void)evolveStep;
 - (void)updateCreatures;

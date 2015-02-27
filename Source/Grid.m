@@ -16,6 +16,7 @@ static const int GRID_COLUMNS = 10;
     float _cellWidth;
     float _cellHeight;
     int _timeCount;
+    //int _totalCount;
     CCNode *_actor;
 }
 
@@ -73,7 +74,8 @@ static const int GRID_COLUMNS = 10;
     _actor.position = ccp(20,288);
     
     _totalStep = 0;
-    _restStep = 2;
+    _restStep = 6;
+    _totalCount = 0;
 }
 
 - (void)evolveStep {
@@ -87,10 +89,11 @@ static const int GRID_COLUMNS = 10;
         [self closeCreatures];
     }
     //检测是否走在不该走的格子上了
-    if(_timeCount == 6){
+    if(_timeCount == 7){
         [self checkIfDeadOrSucceed];
         _timeCount = 0;
-        _restStep = 2;
+        _restStep = 6;
+        _totalCount++;
     }
 }
 
@@ -129,7 +132,7 @@ static const int GRID_COLUMNS = 10;
 
 - (void)checkIfDeadOrSucceed
 {
-    //成功，游戏结束
+    //succeed, then game over
     if(_actor.position.x >= 9 * _cellWidth && _actor.position.x <= 10 * _cellWidth
        && _actor.position.y >= 0 * _cellHeight && _actor.position.y <= 1 * _cellHeight){
         NSLog(@"Succeed");
@@ -141,7 +144,7 @@ static const int GRID_COLUMNS = 10;
         for (int j = 0; j < [_gridArray[i] count]; j++)
         {
             Creature *currentCreature = _gridArray[i][j];
-            //角色死亡，踩到地雷
+            //character dies, then game over
             if(currentCreature.isAlive == YES && _actor.position.x >= j * _cellWidth && _actor.position.x <= (j+1) * _cellWidth
                && _actor.position.y >= i * _cellHeight && _actor.position.y <= (i+1) * _cellHeight){
                 NSLog(@"Over");
@@ -174,7 +177,15 @@ static const int GRID_COLUMNS = 10;
         _totalStep++;
         _restStep--;
         _actor.position = ccp(_actor.position.x + direction.x * _cellWidth,
-                           _actor.position.y + direction.y * _cellHeight);
+                              _actor.position.y + direction.y * _cellHeight);
+        int random = [self getRandomNumberBetweenMin:0 andMax:100];
+        //产生随机数，一定记录随意移动
+        if(random < 80){
+            int horizonalMove = [self getRandomNumberBetweenMin:(0-_actor.position.x/_cellWidth) andMax:(GRID_COLUMNS - _actor.position.x/_cellWidth)];
+            int verticalMove = [self getRandomNumberBetweenMin:(0-_actor.position.y/_cellHeight) andMax:(GRID_ROWS - _actor.position.y/_cellHeight)];
+            _actor.position = ccp(_actor.position.x + horizonalMove * _cellWidth,
+                                  _actor.position.y + verticalMove * _cellHeight);
+        }
     }
 }
 

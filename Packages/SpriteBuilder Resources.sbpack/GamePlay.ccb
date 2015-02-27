@@ -96,8 +96,8 @@
 						<string>ScaleLock</string>
 						<key>value</key>
 						<array>
-							<real>1</real>
-							<real>1</real>
+							<real>0.59187281131744385</real>
+							<real>1.0027005672454834</real>
 							<false/>
 							<integer>0</integer>
 						</array>
@@ -110,7 +110,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>GameOfLifeAssets/BackgroundImage/background.png</string>
+							<string>new_Char/bg_repeatable@4x.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -300,7 +300,7 @@
 												<string>Text</string>
 												<key>value</key>
 												<array>
-													<string>Left Step</string>
+													<string>Total Step</string>
 													<false/>
 												</array>
 											</dict>
@@ -507,7 +507,7 @@
 												<string>Text</string>
 												<key>value</key>
 												<array>
-													<string>Left Time</string>
+													<string>Left Step</string>
 													<false/>
 												</array>
 											</dict>
@@ -1057,8 +1057,6 @@
 												</array>
 											</dict>
 										</array>
-										<key>selected</key>
-										<true/>
 									</dict>
 								</array>
 								<key>customClass</key>
@@ -1232,7 +1230,7 @@
 										<string>Block</string>
 										<key>value</key>
 										<array>
-											<string></string>
+											<string>menu</string>
 											<integer>1</integer>
 										</array>
 									</dict>
@@ -1487,6 +1485,8 @@
 										</array>
 									</dict>
 								</array>
+								<key>selected</key>
+								<true/>
 							</dict>
 							<dict>
 								<key>UUID</key>
