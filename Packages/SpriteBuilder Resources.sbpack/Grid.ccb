@@ -10,7 +10,7 @@
 		<false/>
 	</dict>
 	<key>UUID</key>
-	<integer>2</integer>
+	<integer>19</integer>
 	<key>centeredOrigin</key>
 	<false/>
 	<key>currentResolution</key>
@@ -35,13 +35,18 @@
 	<false/>
 	<key>nodeGraph</key>
 	<dict>
+		<key>animatedProperties</key>
+		<dict>
+			<key>0</key>
+			<dict/>
+		</dict>
 		<key>baseClass</key>
 		<string>CCSprite</string>
 		<key>children</key>
 		<array>
 			<dict>
 				<key>UUID</key>
-				<integer>1</integer>
+				<integer>18</integer>
 				<key>baseClass</key>
 				<string>CCBFile</string>
 				<key>children</key>
@@ -71,8 +76,8 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>20</real>
-							<real>288</real>
+							<real>23</real>
+							<real>288.00469970703125</real>
 							<integer>0</integer>
 							<integer>0</integer>
 							<integer>0</integer>
@@ -85,8 +90,8 @@
 						<string>ScaleLock</string>
 						<key>value</key>
 						<array>
-							<real>0.45945650339126587</real>
-							<real>0.43715617060661316</real>
+							<real>0.47376486659049988</real>
+							<real>0.45226863026618958</real>
 							<false/>
 							<integer>0</integer>
 						</array>
@@ -253,17 +258,17 @@
 			<key>chainedSequenceId</key>
 			<integer>-1</integer>
 			<key>length</key>
-			<real>10</real>
+			<real>4</real>
 			<key>name</key>
 			<string>Default Timeline</string>
 			<key>offset</key>
 			<real>0.0</real>
 			<key>position</key>
-			<real>0.0</real>
+			<real>3.9666666984558105</real>
 			<key>resolution</key>
 			<real>30</real>
 			<key>scale</key>
-			<real>128</real>
+			<real>52.351123809814453</real>
 			<key>sequenceId</key>
 			<integer>0</integer>
 			<key>soundChannel</key>

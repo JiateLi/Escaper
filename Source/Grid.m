@@ -8,6 +8,7 @@
 
 #import "Grid.h"
 #import "Creature.h"
+#import "EndMenu.h"
 static const int GRID_ROWS = 8;
 static const int GRID_COLUMNS = 10;
 
@@ -40,7 +41,7 @@ static const int GRID_COLUMNS = 10;
     UISwipeGestureRecognizer *swipeDown= [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeDown)];
     swipeDown.direction = UISwipeGestureRecognizerDirectionDown;
     [[[CCDirector sharedDirector]view]addGestureRecognizer:swipeDown];
-    
+    _isOver = YES;
 }
 
 - (void)setupGrid {
@@ -76,6 +77,9 @@ static const int GRID_COLUMNS = 10;
     _totalStep = 0;
     _restStep = 6;
     _totalCount = 0;
+    OALSimpleAudio *audio = [OALSimpleAudio sharedInstance];
+    // play background sound
+    [audio playBg:@"nyancat.mp3" loop:YES];
 }
 
 - (void)evolveStep {
@@ -89,7 +93,7 @@ static const int GRID_COLUMNS = 10;
         [self closeCreatures];
     }
     //检测是否走在不该走的格子上了
-    if(_timeCount == 7){
+    if(_timeCount == 5){
         [self checkIfDeadOrSucceed];
         _timeCount = 0;
         _restStep = 6;
@@ -107,12 +111,16 @@ static const int GRID_COLUMNS = 10;
             [currentCreature setIsVisible:NO];
             int random = [self getRandomNumberBetweenMin:0 andMax:100];
             //NSLog(@"random = %i",random);
-            if(random < 30){
+            if(random < 50){
                 currentCreature.isAlive = YES;
                 [currentCreature setIsVisible:YES];
             }
         }
+        
     }
+    Creature *nowCreature = _gridArray[(int)(_actor.position.y/_cellHeight)][(int)(_actor.position.x/_cellWidth)];
+    nowCreature.isAlive = YES;
+    [nowCreature setIsVisible:YES];
 }
 //产生随机个数的不能走的格子
 - (int) getRandomNumberBetweenMin:(int)min andMax:(int)max {
@@ -133,10 +141,10 @@ static const int GRID_COLUMNS = 10;
 - (void)checkIfDeadOrSucceed
 {
     //succeed, then game over
-    if(_actor.position.x >= 9 * _cellWidth && _actor.position.x <= 10 * _cellWidth
-       && _actor.position.y >= 0 * _cellHeight && _actor.position.y <= 1 * _cellHeight){
-        NSLog(@"Succeed");
-    }
+   // if(_actor.position.x >= 9 * _cellWidth && _actor.position.x <= 10 * _cellWidth
+    //   && _actor.position.y >= 0 * _cellHeight && _actor.position.y <= 1 * _cellHeight){
+      //  NSLog(@"Succeed");
+    //}
     //NSLog(@"X location is = %f",_actor.position.x);
     //NSLog(@"Y location is = %f",_actor.position.y);
     for (int i = 0; i < [_gridArray count]; i++)
@@ -147,7 +155,14 @@ static const int GRID_COLUMNS = 10;
             //character dies, then game over
             if(currentCreature.isAlive == YES && _actor.position.x >= j * _cellWidth && _actor.position.x <= (j+1) * _cellWidth
                && _actor.position.y >= i * _cellHeight && _actor.position.y <= (i+1) * _cellHeight){
-                NSLog(@"Over");
+                //NSLog(@"Over");
+                self.paused = YES;
+                _isOver = YES;
+                EndMenu *popup = (EndMenu *)[CCBReader load:@"EndMenu" owner:self];
+                popup.finalScore = _totalCount;
+                popup.positionType = CCPositionTypeNormalized;
+                popup.position = ccp(0.5, 0.5);
+                [self addChild:popup];
             }
         }
     }
@@ -171,6 +186,7 @@ static const int GRID_COLUMNS = 10;
 }
 
 - (void)move:(CGPoint)direction{
+    if(_isOver == NO){
     BOOL isIndexValid;
     isIndexValid = [self isIndexValidForX:((int)(_actor.position.x / _cellWidth) + direction.x) andY:((int)(_actor.position.y / _cellHeight) + direction.y)];
     if(isIndexValid && _restStep > 0){
@@ -180,12 +196,13 @@ static const int GRID_COLUMNS = 10;
                               _actor.position.y + direction.y * _cellHeight);
         int random = [self getRandomNumberBetweenMin:0 andMax:100];
         //产生随机数，一定记录随意移动
-        if(random < 80){
+        if(random < 50){
             int horizonalMove = [self getRandomNumberBetweenMin:(0-_actor.position.x/_cellWidth) andMax:(GRID_COLUMNS - _actor.position.x/_cellWidth)];
             int verticalMove = [self getRandomNumberBetweenMin:(0-_actor.position.y/_cellHeight) andMax:(GRID_ROWS - _actor.position.y/_cellHeight)];
             _actor.position = ccp(_actor.position.x + horizonalMove * _cellWidth,
                                   _actor.position.y + verticalMove * _cellHeight);
         }
+    }
     }
 }
 

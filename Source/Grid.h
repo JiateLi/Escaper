@@ -13,7 +13,7 @@
 //@property (nonatomic, assign) int totalAlive;
 @property (nonatomic, assign) int setp;
 @property (nonatomic, assign) int time;
-
+@property (nonatomic, assign) BOOL isOver;
 @property (nonatomic, assign) int totalStep;
 @property (nonatomic, assign) int restStep;
 @property (nonatomic, assign) int totalCount;
